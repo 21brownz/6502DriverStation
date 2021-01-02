@@ -22,5 +22,6 @@ fun main(){
                 println("\"Y\" on \"" + currState.controllerType + "\" is pressed")
             }
         }
+        println(currState.leftStickX)
     }
 }
