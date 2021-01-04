@@ -17,10 +17,13 @@ class StreamBuilder {
      * @author zbrown
      */
     fun buildStream(buttons: MutableList<Boolean>, axes: MutableList<Float>){
+        stream.clear()
         stream.addAll(floatToByte(axes[0])) //left stick x
         stream.addAll(floatToByte(axes[1])) //left stick y
         stream.addAll(floatToByte(axes[2])) //right stick x
         stream.addAll(floatToByte(axes[3])) //right stick y
+        stream.addAll(floatToByte(axes[4])) //left trigger
+        stream.addAll(floatToByte(axes[5])) //right trigger
         stream.add(boolToByte(buttons.subList(0,7))) //abxy and d pad
         stream.add(boolToByte(buttons.subList(8,15))) //other buttons
     }

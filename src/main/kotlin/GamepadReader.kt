@@ -1,6 +1,12 @@
 import com.studiohartman.jamepad.ControllerManager
 import com.studiohartman.jamepad.ControllerState
 
+/**
+ * class for converting gamepad input from a bunch of individual booleans and floats into two MutableLists of them.
+ * @author zbrown
+ * @param index the index of the controller to be read
+ * @param manager the ControllerManager object provided by Jamepad
+ */
 class GamepadReader(private val index: Int, private val manager: ControllerManager) {
 
 
@@ -26,10 +32,13 @@ class GamepadReader(private val index: Int, private val manager: ControllerManag
         state = manager.getState(index)
     }
 
+    /**
+     * updates the state of all the buttons on the gamepad. call this before reading the contents of buttons or axes
+     */
     fun update(){
         //get the latest state
         updateState()
-
+        //has this function been run before?
         if(buttons.size == 0){
             buttons.add(state.a)
             buttons.add(state.b)
@@ -54,6 +63,7 @@ class GamepadReader(private val index: Int, private val manager: ControllerManag
             axes.add(state.leftTrigger)
             axes.add(state.rightTrigger)
         }
+        //it hasn't been run, so do this
         //update all the buttons
         buttons[0] = state.a
         buttons[1] = state.b
