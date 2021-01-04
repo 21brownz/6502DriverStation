@@ -6,6 +6,7 @@ import java.nio.ByteBuffer
  * @author zbrown
  */
 class StreamBuilder {
+
     /**
      * the stream being built by the class
      */
@@ -15,7 +16,7 @@ class StreamBuilder {
      * builds the button and axis stream.
      * @author zbrown
      */
-    fun buildStream(buttons: List<Boolean>, axes: List<Float>){
+    fun buildStream(buttons: MutableList<Boolean>, axes: MutableList<Float>){
         stream.addAll(floatToByte(axes[0])) //left stick x
         stream.addAll(floatToByte(axes[1])) //left stick y
         stream.addAll(floatToByte(axes[2])) //right stick x
@@ -30,7 +31,7 @@ class StreamBuilder {
      * @author zbrown
      * @throws IllegalArgumentException if more than 8 booleans are given
      */
-    fun boolToByte(bool: List<Boolean>): Byte {
+    private fun boolToByte(bool: List<Boolean>): Byte {
         if(bool.size>8){
             throw IllegalArgumentException("Input List Too Large!")
         }
