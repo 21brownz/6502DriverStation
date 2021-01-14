@@ -7,7 +7,7 @@ import GamepadReader
 fun main(){
     val manager = ControllerManager()
     manager.initSDLGamepad()
-     val reader = GamepadReader(0, manager)
+    val reader = GamepadReader(0, manager)
     while(true) {
         reader.update()
         println(reader.axes)

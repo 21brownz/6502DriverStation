@@ -20,6 +20,7 @@ dependencies {
     implementation("uk.co.electronstudio.sdl2gdx:sdl2gdx:1.0.+")
     implementation("com.fazecast:jSerialComm:[2.0.0,3.0.0)")
     implementation("com.github.WilliamAHartman:Jamepad:1.4.0")
+    implementation("net.razorvine:pickle:1.0")
 }
 
 tasks.test {
