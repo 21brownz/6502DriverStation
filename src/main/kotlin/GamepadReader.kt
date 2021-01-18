@@ -9,17 +9,10 @@ import com.studiohartman.jamepad.ControllerState
  */
 class GamepadReader(private val index: Int, private val manager: ControllerManager) {
 
-
     /**
-     * mutable list containing the state of all the buttons on a gamepad
+     * A hashmap of name to bool/float for buttons and axises
      */
-    var buttons = mutableListOf<Boolean>()
-
-    /**
-     * mutable list of axes on the controller
-     */
-    var axes = mutableListOf<Float>()
-
+    val data = HashMap<String, Any>()
     /**
      * controller state variable. I put it in this scope to try and prevent wasting memory, but this might not actually help
      */
@@ -33,59 +26,48 @@ class GamepadReader(private val index: Int, private val manager: ControllerManag
     }
 
     /**
-     * updates the state of all the buttons on the gamepad. call this before reading the contents of buttons or axes
+     * updates the state of all the data on the gamepad. call this before reading the contents of data or axes
      */
     fun update(){
+        val data = HashMap<String, Any>()
         //get the latest state
         updateState()
-        //has this function been run before?
-        if(buttons.size == 0){
-            buttons.add(state.a)
-            buttons.add(state.b)
-            buttons.add(state.x)
-            buttons.add(state.y)
-            buttons.add(state.dpadUp)
-            buttons.add(state.dpadDown)
-            buttons.add(state.dpadLeft)
-            buttons.add(state.dpadRight)
-            buttons.add(state.lb)
-            buttons.add(state.rb)
-            buttons.add(state.back)
-            buttons.add(state.start)
-            buttons.add(state.guide)
-            buttons.add(state.leftStickJustClicked)
-            buttons.add(state.rightStickJustClicked)
-            //update all the axes
-            axes.add(state.leftStickX)
-            axes.add(state.leftStickY)
-            axes.add(state.rightStickX)
-            axes.add(state.rightStickY)
-            axes.add(state.leftTrigger)
-            axes.add(state.rightTrigger)
-        }
+
         //it hasn't been run, so do this
-        //update all the buttons
-        buttons[0] = state.a
-        buttons[1] = state.b
-        buttons[2] = state.x
-        buttons[3] = state.y
-        buttons[4] = state.dpadUp
-        buttons[5] = state.dpadDown
-        buttons[6] = state.dpadLeft
-        buttons[7] = state.dpadRight
-        buttons[8] = state.lb
-        buttons[9] = state.rb
-        buttons[10] = state.back
-        buttons[11] = state.start
-        buttons[12] = state.guide
-        buttons[13] = state.leftStickJustClicked
-        buttons[14] = state.rightStickJustClicked
+        //update all the data
+        data["a"] = state.a
+        data["b"] = state.b
+        data["x"] = state.x
+        data["y"] = state.y
+        data["up"] = state.dpadUp
+        data["down"] = state.dpadDown
+        data["left"] = state.dpadLeft
+        data["right"] = state.dpadRight
+        data["leftBumper"] = state.lb
+        data["rightBumper"] = state.rb
+        data["back"] = state.back
+        data["start"] = state.start
+        data["guide"] = state.guide
+        data["leftStickButton"] = state.leftStickJustClicked
+        data["leftStickButton"] = state.rightStickJustClicked
         //update all the axes
-        axes[0] = state.leftStickX
-        axes[1] = state.leftStickY
-        axes[2] = state.rightStickX
-        axes[3] = state.rightStickY
-        axes[4] = state.leftTrigger
-        axes[5] = state.rightTrigger
+        data["leftX"] = state.leftStickX
+        data["leftY"] = state.leftStickY
+        data["rightX"] = state.rightStickX
+        data["rightY"] = state.rightStickY
+        data["leftTrigger"] = state.leftTrigger
+        data["rightTrigger"] = state.rightTrigger
     }
 }
+
+/*
+buttons = ['a', 'x', 'y', 'b',
+           'rightBumper', 'leftBumper', 'leftStickButton', 'rightStickButton',
+           'guide', 'back', 'start'
+           'up', 'down', 'left', 'right'
+        ]
+axes = [
+    "leftX", "leftY", "rightX", "rightY",
+    "leftTrigger", "rightTrigger"
+]
+ */
